@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Charts — Blackorbs</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #08090c;
+  --bg-glow-1: #1c1543;
+  --bg-glow-2: #082832;
+  --surface-1: rgba(255,255,255,0.035);
+  --surface-2: rgba(255,255,255,0.05);
+  --text-primary: #eef0f4;
+  --text-secondary: #a3a8b4;
+  --text-muted: #6c7080;
+  --border: rgba(255,255,255,0.09);
+  --shadow-dark: rgba(0,0,0,0.55);
+  --shadow-light: rgba(255,255,255,0.04);
+  --good: #2fd35b;
+  --warning: #fbb63e;
+  --serious: #ff8c5c;
+  --critical: #ff5470;
+  --blue: #4d8dff;
+  --violet: #8b6bf2;
+  --magenta: #ef7fc0;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh;
+  background: var(--bg); color: var(--text-primary);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 20px; padding: 32px 16px 64px;
+  position: relative;
+  overflow-x: hidden;
+}
+body::before {
+  content: ""; position: fixed; inset: -10%; z-index: -1;
+  background:
+    radial-gradient(circle at 15% 20%, var(--bg-glow-1), transparent 45%),
+    radial-gradient(circle at 85% 75%, var(--bg-glow-2), transparent 50%),
+    var(--bg);
+  filter: blur(70px);
+  opacity: .5;
+}
+.topbar {
+  width: 100%; max-width: 720px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+.topbar h1 { font-size: 18px; margin: 0; font-weight: 600; }
+.volver {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--text-secondary); text-decoration: none;
+  font-size: 13px; padding: 8px 12px; border-radius: 10px;
+  background: var(--surface-1); border: 1px solid var(--border);
+}
+.volver:hover { color: var(--text-primary); }
+.refrescar {
+  font-size: 12px; color: var(--text-muted); background: none; border: none;
+  cursor: pointer; padding: 6px 10px; border-radius: 8px;
+}
+.refrescar:hover { color: var(--text-secondary); background: var(--surface-1); }
+
+.card {
+  width: 100%; max-width: 720px;
+  background: linear-gradient(160deg, var(--surface-2), var(--surface-1));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px 18px 14px;
+  backdrop-filter: blur(14px);
+  box-shadow: 6px 6px 16px var(--shadow-dark), -5px -5px 14px var(--shadow-light);
+}
+.card-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.card-head h2 { font-size: 14px; margin: 0; font-weight: 600; color: var(--text-primary); }
+.card-head .valor-actual { font-size: 13px; color: var(--text-secondary); }
+canvas { width: 100%; height: 140px; display: block; }
+.rango {
+  display: flex; justify-content: space-between;
+  font-size: 11px; color: var(--text-muted); margin-top: 6px;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+th, td { text-align: left; padding: 7px 6px; border-bottom: 1px solid var(--border); }
+th { color: var(--text-muted); font-weight: 500; }
+td { color: var(--text-secondary); }
+tr:last-child td { border-bottom: none; }
+.sev-Critical { color: var(--critical); }
+.sev-Attention, .sev-High { color: var(--warning); }
+.vacio { color: var(--text-muted); font-size: 13px; padding: 8px 0; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="volver" href="/">&larr; Dashboard</a>
+  <h1>Reading History</h1>
+  <button type="button" class="refrescar" id="btn-refrescar">Refresh</button>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <h2>Temperature (°C)</h2>
+    <span class="valor-actual" id="temp-actual">--</span>
+  </div>
+  <canvas id="chart-temp"></canvas>
+  <div class="rango" id="temp-rango"><span></span><span></span></div>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <h2>Humidity (%)</h2>
+    <span class="valor-actual" id="hum-actual">--</span>
+  </div>
+  <canvas id="chart-hum"></canvas>
+  <div class="rango" id="hum-rango"><span></span><span></span></div>
+</div>
+
+<div class="card">
+  <div class="card-head"><h2>Recent Alerts</h2></div>
+  <div id="alertas-cont"><p class="vacio">Loading...</p></div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket = io();
+
+function dibujarLinea(canvas, valores, color) {
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const w = rect.width, h = rect.height;
+  ctx.clearRect(0, 0, w, h);
+
+  const datos = valores.filter((v) => typeof v === 'number' && !Number.isNaN(v));
+  if (datos.length < 2) {
+    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    ctx.font = '13px system-ui';
+    ctx.fillText('Not enough data yet', 10, h / 2);
+    return;
+  }
+
+  const min = Math.min(...datos);
+  const max = Math.max(...datos);
+  const rango = max - min || 1;
+  const pad = 6;
+  const stepX = (w - pad * 2) / (valores.length - 1);
+  const y = (v) => h - pad - ((v - min) / rango) * (h - pad * 2);
+
+  ctx.beginPath();
+  valores.forEach((v, i) => {
+    const x = pad + stepX * i;
+    if (i === 0) ctx.moveTo(x, y(v)); else ctx.lineTo(x, y(v));
+  });
+  ctx.lineTo(pad + stepX * (valores.length - 1), h - pad);
+  ctx.lineTo(pad, h - pad);
+  ctx.closePath();
+  const gradient = ctx.createLinearGradient(0, 0, 0, h);
+  gradient.addColorStop(0, color + '4d');
+  gradient.addColorStop(1, color + '00');
+  ctx.fillStyle = gradient;
+  ctx.fill();
+
+  ctx.beginPath();
+  valores.forEach((v, i) => {
+    const x = pad + stepX * i;
+    if (i === 0) ctx.moveTo(x, y(v)); else ctx.lineTo(x, y(v));
+  });
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+  ctx.stroke();
+}
+
+function formatoHora(ts) {
+  try {
+    return new Date(ts).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  } catch { return ts; }
+}
+
+async function cargarLecturas() {
+  try {
+    const resp = await fetch('/data?limit=200');
+    const lecturas = (await resp.json()).slice().reverse();
+    if (!lecturas.length) return;
+
+    const temps = lecturas.map((l) => l.temperature);
+    const hums = lecturas.map((l) => l.humidity);
+    const ultima = lecturas[lecturas.length - 1];
+
+    dibujarLinea(document.getElementById('chart-temp'), temps, '#4d8dff');
+    dibujarLinea(document.getElementById('chart-hum'), hums, '#8b6bf2');
+
+    document.getElementById('temp-actual').textContent = ultima.temperature != null ? `${ultima.temperature.toFixed(1)}°C` : '--';
+    document.getElementById('hum-actual').textContent = ultima.humidity != null ? `${ultima.humidity.toFixed(1)}%` : '--';
+
+    const tempsValidas = temps.filter((v) => typeof v === 'number');
+    const humsValidas = hums.filter((v) => typeof v === 'number');
+    document.querySelector('#temp-rango span:first-child').textContent = tempsValidas.length ? `min ${Math.min(...tempsValidas).toFixed(1)}°C` : '';
+    document.querySelector('#temp-rango span:last-child').textContent = tempsValidas.length ? `max ${Math.max(...tempsValidas).toFixed(1)}°C` : '';
+    document.querySelector('#hum-rango span:first-child').textContent = humsValidas.length ? `min ${Math.min(...humsValidas).toFixed(1)}%` : '';
+    document.querySelector('#hum-rango span:last-child').textContent = humsValidas.length ? `max ${Math.max(...humsValidas).toFixed(1)}%` : '';
+  } catch (err) {
+    console.error('Error loading readings:', err);
+  }
+}
+
+async function cargarAlertas() {
+  const cont = document.getElementById('alertas-cont');
+  try {
+    const resp = await fetch('/alerts?limit=20');
+    const alertas = await resp.json();
+    if (!alertas.length) {
+      cont.innerHTML = '<p class="vacio">No alerts recorded.</p>';
+      return;
+    }
+    const filas = alertas.map((a) => `
+      <tr>
+        <td>${formatoHora(a.timestamp)}</td>
+        <td>${a.type ?? ''}</td>
+        <td class="sev-${a.severity ?? ''}">${a.severity ?? ''}</td>
+        <td>${a.message ?? ''}</td>
+      </tr>`).join('');
+    cont.innerHTML = `<table><thead><tr><th>Time</th><th>Type</th><th>Severity</th><th>Detail</th></tr></thead><tbody>${filas}</tbody></table>`;
+  } catch (err) {
+    cont.innerHTML = '<p class="vacio">Error loading alerts.</p>';
+    console.error('Error loading alerts:', err);
+  }
+}
+
+function cargarTodo() { cargarLecturas(); cargarAlertas(); }
+
+document.getElementById('btn-refrescar').addEventListener('click', cargarTodo);
+socket.on('newData', cargarLecturas);
+socket.on('mlUpdate', cargarAlertas);
+window.addEventListener('resize', cargarLecturas);
+
+cargarTodo();
+setInterval(cargarTodo, 60000);
+</script>
+</body>
+</html>

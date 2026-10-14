@@ -1,0 +1,76 @@
+intencion,pregunta,proveedor,intento,ok,error,latencia_s,n_numeros,n_respaldados,declara_sin_datos
+estado_actual,¿Cómo está el ambiente ahorita?,claude,1,True,,7.895833519000007,9.0,5.0,False
+estado_actual,¿Cómo está el ambiente ahorita?,claude,2,True,,6.580325422000897,7.0,4.0,False
+estado_actual,¿Cómo está el ambiente ahorita?,claude,3,True,,6.472374816999945,7.0,4.0,False
+estado_actual,¿Cuál es el estado actual del dispositivo?,claude,1,True,,5.293469077998452,14.0,6.0,False
+estado_actual,¿Cuál es el estado actual del dispositivo?,claude,2,True,,5.872464209998725,12.0,6.0,False
+estado_actual,¿Cuál es el estado actual del dispositivo?,claude,3,True,,14.80936455399933,12.0,6.0,False
+estado_actual,¿Hay alguna anomalía en este momento?,claude,1,True,,8.772377632001735,21.0,10.0,False
+estado_actual,¿Hay alguna anomalía en este momento?,claude,2,True,,7.573842570000124,18.0,8.0,False
+estado_actual,¿Hay alguna anomalía en este momento?,claude,3,True,,8.071628042998782,18.0,7.0,False
+estado_actual,Dame la lectura más reciente de temperatura y humedad.,claude,1,True,,4.071895540000696,6.0,1.0,False
+estado_actual,Dame la lectura más reciente de temperatura y humedad.,claude,2,True,,4.132165847000579,6.0,1.0,False
+estado_actual,Dame la lectura más reciente de temperatura y humedad.,claude,3,True,,6.444842052002059,6.0,1.0,False
+estado_actual,¿Qué tan normal es la condición actual según el modelo?,claude,1,True,,5.706534401997487,11.0,4.0,False
+estado_actual,¿Qué tan normal es la condición actual según el modelo?,claude,2,True,,5.337677178999002,11.0,4.0,False
+estado_actual,¿Qué tan normal es la condición actual según el modelo?,claude,3,True,,5.9559735160000855,11.0,4.0,False
+estadisticas_periodo,¿Cuál fue la temperatura promedio en la última hora?,claude,1,True,,14.32982404699942,0.0,0.0,False
+estadisticas_periodo,¿Cuál fue la temperatura promedio en la última hora?,claude,2,True,,14.386009166999429,0.0,0.0,False
+estadisticas_periodo,¿Cuál fue la temperatura promedio en la última hora?,claude,3,True,,13.073567984996771,0.0,0.0,False
+estadisticas_periodo,¿Cuál fue la humedad máxima en los últimos 30 minutos?,claude,1,True,,7.803481065999222,7.0,0.0,False
+estadisticas_periodo,¿Cuál fue la humedad máxima en los últimos 30 minutos?,claude,2,True,,7.46691216399995,7.0,0.0,False
+estadisticas_periodo,¿Cuál fue la humedad máxima en los últimos 30 minutos?,claude,3,True,,9.670975988999999,14.0,1.0,False
+estadisticas_periodo,Dame un resumen de las últimas 2 horas de lecturas.,claude,1,True,,10.78161363000254,34.0,9.0,False
+estadisticas_periodo,Dame un resumen de las últimas 2 horas de lecturas.,claude,2,True,,12.554385976000049,33.0,9.0,False
+estadisticas_periodo,Dame un resumen de las últimas 2 horas de lecturas.,claude,3,True,,9.20955565300028,35.0,12.0,False
+estadisticas_periodo,¿Cuánto varió la temperatura en la última hora?,claude,1,True,,9.487597346997063,23.0,7.0,False
+estadisticas_periodo,¿Cuánto varió la temperatura en la última hora?,claude,2,True,,9.049400940999476,20.0,6.0,False
+estadisticas_periodo,¿Cuánto varió la temperatura en la última hora?,claude,3,True,,11.046531887997844,21.0,6.0,False
+estadisticas_periodo,¿Cuál fue la humedad mínima registrada en los últimos 60 minutos?,claude,1,True,,10.048804320002091,9.0,2.0,False
+estadisticas_periodo,¿Cuál fue la humedad mínima registrada en los últimos 60 minutos?,claude,2,True,,10.975233602002845,12.0,3.0,False
+estadisticas_periodo,¿Cuál fue la humedad mínima registrada en los últimos 60 minutos?,claude,3,True,,9.981622821000201,12.0,3.0,False
+comparacion_periodos,¿La temperatura de la última hora es más alta que la de las dos horas anteriores?,claude,1,True,,14.61934040900087,0.0,0.0,False
+comparacion_periodos,¿La temperatura de la última hora es más alta que la de las dos horas anteriores?,claude,2,True,,14.949453232999076,0.0,0.0,False
+comparacion_periodos,¿La temperatura de la última hora es más alta que la de las dos horas anteriores?,claude,3,True,,15.286483543997747,0.0,0.0,False
+comparacion_periodos,Compara la humedad de los últimos 30 minutos contra los 30 minutos previos.,claude,1,True,,15.575989820998075,0.0,0.0,False
+comparacion_periodos,Compara la humedad de los últimos 30 minutos contra los 30 minutos previos.,claude,2,True,,15.494198855001741,0.0,0.0,False
+comparacion_periodos,Compara la humedad de los últimos 30 minutos contra los 30 minutos previos.,claude,3,True,,14.465440121999563,0.0,0.0,False
+comparacion_periodos,¿Ha subido o bajado la temperatura respecto a hace una hora?,claude,1,True,,7.076179597999726,17.0,5.0,False
+comparacion_periodos,¿Ha subido o bajado la temperatura respecto a hace una hora?,claude,2,True,,7.849736363001284,19.0,7.0,False
+comparacion_periodos,¿Ha subido o bajado la temperatura respecto a hace una hora?,claude,3,True,,6.937071033000393,14.0,3.0,False
+comparacion_periodos,¿Está más húmedo ahora que hace 2 horas?,claude,1,True,,7.582246862999455,16.0,3.0,False
+comparacion_periodos,¿Está más húmedo ahora que hace 2 horas?,claude,2,True,,7.812099938000756,16.0,3.0,False
+comparacion_periodos,¿Está más húmedo ahora que hace 2 horas?,claude,3,True,,6.401016525000159,17.0,3.0,False
+comparacion_periodos,Compara el estado actual contra el forecast pronosticado.,claude,1,True,,7.669846574000985,13.0,5.0,False
+comparacion_periodos,Compara el estado actual contra el forecast pronosticado.,claude,2,True,,7.2059066589972645,14.0,6.0,False
+comparacion_periodos,Compara el estado actual contra el forecast pronosticado.,claude,3,True,,7.620957798000745,13.0,6.0,False
+recuerdo_alertas,¿Cuáles son las alertas más recientes?,claude,1,True,,6.522163507997902,27.0,3.0,False
+recuerdo_alertas,¿Cuáles son las alertas más recientes?,claude,2,True,,6.444382368998049,26.0,3.0,False
+recuerdo_alertas,¿Cuáles son las alertas más recientes?,claude,3,True,,6.5801778429995466,27.0,3.0,False
+recuerdo_alertas,¿Ha habido alguna anomalía crítica recientemente?,claude,1,True,,5.963112940000428,9.0,3.0,False
+recuerdo_alertas,¿Ha habido alguna anomalía crítica recientemente?,claude,2,True,,6.017532793997816,16.0,5.0,False
+recuerdo_alertas,¿Ha habido alguna anomalía crítica recientemente?,claude,3,True,,5.183334081000794,14.0,4.0,False
+recuerdo_alertas,¿Cuántas alertas de atención se generaron recientemente?,claude,1,True,,5.075644883003406,13.0,2.0,False
+recuerdo_alertas,¿Cuántas alertas de atención se generaron recientemente?,claude,2,True,,5.29262237200237,19.0,3.0,False
+recuerdo_alertas,¿Cuántas alertas de atención se generaron recientemente?,claude,3,True,,7.099707105000562,19.0,3.0,False
+recuerdo_alertas,Dame detalles de la última alerta registrada.,claude,1,True,,6.5565467630003695,6.0,1.0,False
+recuerdo_alertas,Dame detalles de la última alerta registrada.,claude,2,True,,5.745336431999021,6.0,1.0,False
+recuerdo_alertas,Dame detalles de la última alerta registrada.,claude,3,True,,5.983135823000339,7.0,1.0,False
+recuerdo_alertas,¿Cuál fue la variable responsable de la última anomalía?,claude,1,True,,5.319781566002348,7.0,1.0,False
+recuerdo_alertas,¿Cuál fue la variable responsable de la última anomalía?,claude,2,True,,5.542310876000556,7.0,1.0,False
+recuerdo_alertas,¿Cuál fue la variable responsable de la última anomalía?,claude,3,True,,5.478275698998914,7.0,1.0,False
+fuera_de_alcance,¿Cuál es el pronóstico del clima para mañana en la ciudad?,claude,1,True,,8.026523616001214,6.0,3.0,True
+fuera_de_alcance,¿Cuál es el pronóstico del clima para mañana en la ciudad?,claude,2,True,,6.173690010000428,5.0,3.0,True
+fuera_de_alcance,¿Cuál es el pronóstico del clima para mañana en la ciudad?,claude,3,True,,6.988736462997622,7.0,2.0,True
+fuera_de_alcance,¿Cuántos dispositivos Blackorbs existen en el mundo?,claude,1,True,,3.755167580999114,0.0,0.0,True
+fuera_de_alcance,¿Cuántos dispositivos Blackorbs existen en el mundo?,claude,2,True,,6.749110249998921,0.0,0.0,True
+fuera_de_alcance,¿Cuántos dispositivos Blackorbs existen en el mundo?,claude,3,True,,5.66239527399739,0.0,0.0,True
+fuera_de_alcance,¿Puedes prender el aire acondicionado del cuarto?,claude,1,True,,9.931648763998965,7.0,4.0,True
+fuera_de_alcance,¿Puedes prender el aire acondicionado del cuarto?,claude,2,True,,8.146547086998908,7.0,4.0,True
+fuera_de_alcance,¿Puedes prender el aire acondicionado del cuarto?,claude,3,True,,7.409982217999641,6.0,2.0,True
+fuera_de_alcance,¿Cuál fue la temperatura hace exactamente un año?,claude,1,True,,8.40424187499957,6.0,2.0,True
+fuera_de_alcance,¿Cuál fue la temperatura hace exactamente un año?,claude,2,True,,7.572428703002515,6.0,2.0,True
+fuera_de_alcance,¿Cuál fue la temperatura hace exactamente un año?,claude,3,False,Error al procesar el mensaje,11.050414593999449,,,
+fuera_de_alcance,¿Qué opinas de la bolsa de valores hoy?,claude,1,True,,2.7928675670009397,0.0,0.0,True
+fuera_de_alcance,¿Qué opinas de la bolsa de valores hoy?,claude,2,True,,2.6959728480032936,0.0,0.0,True
+fuera_de_alcance,¿Qué opinas de la bolsa de valores hoy?,claude,3,True,,2.730682049997995,0.0,0.0,True

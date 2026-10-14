@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blackorbs — Access</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #08090c;
+  --bg-glow-1: #1c1543;
+  --bg-glow-2: #082832;
+  --surface-1: rgba(255,255,255,0.035);
+  --surface-2: rgba(255,255,255,0.05);
+  --text-primary: #eef0f4;
+  --text-secondary: #a3a8b4;
+  --text-muted: #6c7080;
+  --border: rgba(255,255,255,0.09);
+  --shadow-dark: rgba(0,0,0,0.55);
+  --shadow-light: rgba(255,255,255,0.04);
+  --critical: #ff5470;
+  --blue: #4d8dff;
+  --violet: #8b6bf2;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh;
+  background: var(--bg); color: var(--text-primary);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow-x: hidden;
+}
+body::before {
+  content: ""; position: fixed; inset: -10%; z-index: -1;
+  background:
+    radial-gradient(circle at 15% 20%, var(--bg-glow-1), transparent 45%),
+    radial-gradient(circle at 85% 75%, var(--bg-glow-2), transparent 50%),
+    var(--bg);
+  filter: blur(70px);
+  opacity: .5;
+}
+.card {
+  width: min(300px, 90vw);
+  background: linear-gradient(160deg, var(--surface-2), var(--surface-1));
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px 24px;
+  backdrop-filter: blur(14px);
+  box-shadow: 6px 6px 16px var(--shadow-dark), -5px -5px 14px var(--shadow-light);
+  text-align: center;
+}
+.card h1 { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+.card p { font-size: 12.5px; color: var(--text-muted); margin: 0 0 20px; }
+.pin-dots {
+  display: flex; justify-content: center; gap: 12px; margin-bottom: 20px;
+}
+.pin-dots span {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: rgba(255,255,255,0.08); border: 1px solid var(--border);
+  transition: background .15s, transform .15s;
+}
+.pin-dots span.filled { background: var(--blue); transform: scale(1.1); }
+.pin-dots.error span.filled { background: var(--critical); }
+input#pin-input {
+  position: absolute; opacity: 0; pointer-events: none;
+}
+.keypad {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+}
+.keypad button {
+  aspect-ratio: 1; border-radius: 14px; border: none; cursor: pointer;
+  font-size: 18px; font-weight: 600; color: var(--text-primary);
+  background: linear-gradient(145deg, var(--surface-2), var(--surface-1));
+  box-shadow: 3px 3px 8px var(--shadow-dark), -3px -3px 8px var(--shadow-light);
+}
+.keypad button:active { transform: scale(0.95); }
+.keypad button.vacio { visibility: hidden; }
+.mensaje { font-size: 12.5px; color: var(--critical); min-height: 18px; margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Panel access</h1>
+  <p>Enter the 4-digit code</p>
+  <div class="pin-dots" id="pin-dots">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <input id="pin-input" inputmode="numeric" maxlength="4" autofocus>
+  <div class="keypad" id="keypad">
+    <button type="button" data-num="1">1</button>
+    <button type="button" data-num="2">2</button>
+    <button type="button" data-num="3">3</button>
+    <button type="button" data-num="4">4</button>
+    <button type="button" data-num="5">5</button>
+    <button type="button" data-num="6">6</button>
+    <button type="button" data-num="7">7</button>
+    <button type="button" data-num="8">8</button>
+    <button type="button" data-num="9">9</button>
+    <button type="button" class="vacio"></button>
+    <button type="button" data-num="0">0</button>
+    <button type="button" id="btn-borrar">&larr;</button>
+  </div>
+  <p class="mensaje" id="mensaje"></p>
+</div>
+
+<script>
+const pinInput = document.getElementById('pin-input');
+const pinDots = document.getElementById('pin-dots');
+const mensaje = document.getElementById('mensaje');
+const dots = [...pinDots.children];
+let enviando = false;
+
+function actualizarDots() {
+  dots.forEach((d, i) => d.classList.toggle('filled', i < pinInput.value.length));
+}
+
+async function intentarLogin() {
+  if (enviando) return;
+  enviando = true;
+  mensaje.textContent = '';
+  try {
+    const resp = await fetch('/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pin: pinInput.value }),
+    });
+    const data = await resp.json();
+    if (resp.ok && data.ok) {
+      window.location.href = '/';
+      return;
+    }
+    pinDots.classList.add('error');
+    mensaje.textContent = data.error || 'Incorrect code';
+    pinInput.value = '';
+    actualizarDots();
+    setTimeout(() => pinDots.classList.remove('error'), 400);
+  } catch (err) {
+    mensaje.textContent = 'Connection error, please try again.';
+  } finally {
+    enviando = false;
+  }
+}
+
+function agregarDigito(d) {
+  if (pinInput.value.length >= 4 || enviando) return;
+  pinInput.value += d;
+  actualizarDots();
+  if (pinInput.value.length === 4) intentarLogin();
+}
+
+document.getElementById('keypad').addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  if (btn.id === 'btn-borrar') {
+    pinInput.value = pinInput.value.slice(0, -1);
+    actualizarDots();
+    return;
+  }
+  if (btn.dataset.num !== undefined) agregarDigito(btn.dataset.num);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (/^[0-9]$/.test(e.key)) agregarDigito(e.key);
+  if (e.key === 'Backspace') { pinInput.value = pinInput.value.slice(0, -1); actualizarDots(); }
+});
+
+pinInput.focus();
+</script>
+</body>
+</html>

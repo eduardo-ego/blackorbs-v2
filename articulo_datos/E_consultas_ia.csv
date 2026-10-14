@@ -1,0 +1,109 @@
+id,device_id,modelo,prompt,respuesta,timestamp
+1,ORBE_001,claude,¿Cómo están las condiciones ambientales ahora mismo? Responde en una oración.,"El sistema reporta el estado ""contento"" (reiniciado tras pruebas manuales), pero no hay ninguna lectura de sensor disponible en este momento, así que no puedo darte valores de temperatura, humedad ni presión.",2026-08-22T22:04:09.506Z
+2,ORBE_001,claude,¿Cómo están las condiciones ambientales ahora mismo? Responde en una oración.,"Todo está en orden: 23.8 °C, 58.1 % de humedad y 1013.5 hPa de presión, con el orbe en estado ""contento"".",2026-08-22T22:04:29.740Z
+3,ORBE_001,claude,Cuál es la última medición,"Última lectura del ORBE_001:
+
+- 🌡️ Temperatura: 23.8 °C
+- 💧 Humedad: 58.1 %
+- 🔽 Presión: 1013.5 hPa
+- 🕒 Registrada: 22/08/2026, 22:04 UTC",2026-08-22T22:44:52.860Z
+4,ORBE_001,claude,Dame la última medición de temperatura y humedad,"Última lectura del ORBE_001:
+
+- 🌡️ Temperatura: **27.47 °C**
+- 💧 Humedad: **57.38 %**
+- 🕐 Tomada el 22/08/2026 a las 23:44:54 UTC
+
+(No se registró valor de presión en esta lectura.)",2026-08-22T23:45:13.786Z
+5,ORBE_001,claude,Muéstrame las mediciones promedio de las últimas horas,"No pude obtener una respuesta clara, intenta reformular la pregunta.",2026-08-23T03:24:03.863Z
+6,ORBE_001,claude,Saca el promedio de las mediciones de las últimas 5 hrs,"No pude obtener una respuesta clara, intenta reformular la pregunta.",2026-08-23T03:24:48.462Z
+7,ORBE_001,claude,Cuáles son las últimas mediciones de temperatura,"Últimas mediciones de temperatura (dispositivo ORBE_001):
+
+- **03:25 — 27.51 °C** (última lectura, humedad 57.82 %)
+- 03:24 — 27.11 °C
+- 03:23 — 27.45 °C
+- 03:22 — 27.26 °C
+- 03:21 — 27.34 °C
+- 03:20 — 27.19 °C
+
+Tendencia: en la última hora la temperatura subió desde ~26.2 °C (02:25) hasta 27.5 °C, es decir un alza sostenida de poco más de 1 °C, acompañada de una ligera baja de humedad. ¿Quieres que revise si el sistema marcó alguna anomalía por esto?",2026-08-23T03:25:11.400Z
+8,ORBE_001,claude,¿A qué hora fue la última lectura del sensor? Responde en una oración con la hora local.,La última lectura del sensor fue el 22/08 a las 09:31 p.m. (hora local).,2026-08-23T03:31:33.288Z
+9,ORBE_001,claude,Cómo va todo?,"No tan bien: el estado es **crítico** 🔴
+
+- **Última lectura (23/08, 08:51 a.m.):** 29.67 °C y 50.89 % de humedad.
+- **Anomalía:** score -0.268, con la **humedad** como probable causa. El modelo marca esta combinación de lecturas como inusual (normalidad de solo 0.4 %).
+- **Pronóstico a 60 min (confianza alta):** 29.71 °C y 51.28 % de humedad.
+
+¿Quieres que revise las alertas recientes o la tendencia de la última hora?",2026-08-23T14:51:50.653Z
+10,ORBE_001,claude,Cómo va todo,"Ahora mismo el dispositivo está en estado **crítico** (23/08, 08:52 a.m.).
+
+**Última lectura:**
+- Temperatura: 30.16 °C
+- Humedad: 50.63 %
+- Presión: sin dato
+
+**Qué detectó el sistema:** el modelo marca esta combinación de lecturas como inusual, con la humedad como posible causa (score de anomalía −0.245, normalidad 0.6 %).
+
+**Pronóstico a 60 minutos** (confianza alta): 29.73 °C y 51.04 % de humedad, o sea bastante estable respecto a lo actual.
+
+¿Quieres que revise las alertas recientes o la tendencia de la última hora para ver desde cuándo viene la anomalía?",2026-08-23T14:52:42.434Z
+11,ORBE_001,claude,Cómo va todo?,"Todo va en **estado de atención** (no crítico), con corte a las 11:21 a.m.
+
+**Ahora mismo:**
+- Temperatura: 29.41 °C
+- Humedad: 53.07 %
+
+**Qué llamó la atención:** el modelo detectó una combinación de lecturas inusual, con la humedad como posible causa. El nivel de normalidad está en 5.5 %, así que vale la pena echarle un ojo.
+
+**Pronóstico para la próxima hora** (confianza alta):
+- Temperatura: ~28.97 °C
+- Humedad: ~54.09 %
+
+O sea, se espera que las condiciones se mantengan bastante estables. ¿Quieres que revise la tendencia de las últimas horas o las alertas recientes?",2026-08-23T17:22:42.854Z
+12,ORBE_001,claude,Cómo va todo,"No del todo bien: el estado es **crítico** 🔴
+
+- **Última lectura (23/08, 12:02 p.m.):** 29.51 °C y 51.17 % de humedad.
+- **Motivo:** el modelo marca esta combinación de lecturas como inusual, con la **humedad** como probable causa. El nivel de normalidad está en apenas 1.6 %.
+- **Pronóstico a 60 min (confianza alta):** 29.61 °C y 50.63 % de humedad, o sea sin cambios importantes a la vista.
+
+¿Quieres que revise las alertas recientes o la tendencia de la última hora para ver desde cuándo viene esto?",2026-08-23T18:02:46.275Z
+13,ORBE_001,claude,Cómo va todo,"No tan bien: el estado es **crítico** ⚠️
+
+- **Última lectura (23/08, 12:47 p.m.):** 29.21 °C y 51.02 % de humedad.
+- **Anomalía:** el modelo marca esta combinación como inusual, con la **humedad** como posible causa. La normalidad está en apenas 3.4 % (score −0.1001).
+- **Pronóstico a 60 min (confianza alta):** 29.24 °C y 50.94 % de humedad, o sea prácticamente sin cambios.
+
+Si quieres, reviso las alertas recientes o la tendencia de la última hora para ver desde cuándo viene el desvío.",2026-08-23T18:48:04.316Z
+14,ORBE_001,claude,tienes un historial de mediciones,"Sí. Tengo el historial del sensor y puedo consultarlo por ventanas de tiempo. Lo que traje ahora cubre desde el **01/09 a las 06:00 p.m.** hasta el **02/09 a las 12:07 p.m.**, con lecturas cada minuto de temperatura y humedad (la presión viene vacía en este dispositivo).
+
+Resumen rápido de esa ventana:
+- **Mínimo de temperatura:** 17.79 °C, el 02/09 a las 06:40 a.m. (con humedad alta, ~88 %).
+- **Máximo de temperatura:** 37.85 °C, el 02/09 a las 09:02 a.m. (humedad ~41 %).
+- **Última lectura:** 31.08 °C y 50.31 % de humedad, el 02/09 a las 12:07 p.m.
+- Patrón general: noche fresca y húmeda (18–19 °C), subida fuerte a media mañana y ahora se mantiene alrededor de los 30 °C.
+
+Si quieres, puedo mostrarte una ventana más corta (por ejemplo la última hora), el estado actual del sistema o las alertas recientes.",2026-09-02T18:08:44.354Z
+15,ORBE_001,claude,puedes generar alguna prediccion de temperatura para el mes de septiembre,"No puedo darte una predicción para todo septiembre: el modelo de ML de este dispositivo solo genera pronósticos de corto plazo.
+
+Lo que sí hay vigente (calculado a las 12:07 p.m.):
+
+- **Horizonte:** 60 minutos hacia adelante
+- **Temperatura pronosticada:** 31.2 °C
+- **Humedad pronosticada:** 49.55 %
+- **Confianza:** alta
+
+Si quieres, puedo mostrarte la tendencia de las últimas horas para que te des una idea del comportamiento reciente, pero cualquier estimación mensual sería inventada por mí y prefiero no hacerlo.",2026-09-02T18:09:01.988Z
+16,ORBE_001,claude,en donde estas haciendo las mediciones,"No tengo un dato de ubicación física: los sensores no reportan coordenadas ni nombre de sitio, así que no puedo decirte en qué lugar están instalados.
+
+Lo único que identifica el origen de las mediciones es el dispositivo **ORBE_001**, y su zona horaria configurada es America/Mexico_City (por eso las horas que te doy son locales de México).
+
+Su última lectura fue a las 12:09 p.m.: 30.77 °C y 49.94 % de humedad.",2026-09-02T18:09:47.834Z
+17,ORBE_001,claude,puedes predecir la temperatura de hoy por la tarde,"Puedo darte una predicción, pero de corto alcance: el modelo solo pronostica **hasta 60 minutos hacia adelante**, no toda la tarde.
+
+Esto es lo que hay ahora (12:38 p.m.):
+
+- **Temperatura actual:** 30.62 °C
+- **Pronóstico para ~1:38 p.m.:** 30.66 °C (confianza alta)
+- **Humedad pronosticada:** 50.12 %
+- **Estado:** contento — el patrón de temperatura/humedad está dentro de lo normal.
+
+O sea, en la próxima hora se espera que la temperatura se mantenga prácticamente igual. Para el resto de la tarde no tengo dato: si quieres, vuelve a preguntarme más tarde y te doy el pronóstico actualizado.",2026-09-06T18:39:04.086Z

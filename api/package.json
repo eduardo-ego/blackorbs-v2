@@ -1,0 +1,28 @@
+{
+  "name": "device-api-v2",
+  "version": "2.0.0",
+  "description": "API v2 del dispositivo — SQLite en vez de MongoDB, LLM solo como capa de lenguaje natural sobre resultados ya calculados por el servicio de ML.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.120.0",
+    "better-sqlite3": "^11.9.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-session": "^1.19.0",
+    "node-telegram-bot-api": "^0.66.0",
+    "nodemailer": "^7.0.2",
+    "openai": "^4.96.2",
+    "socket.io": "^4.8.1",
+    "twilio": "^5.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
